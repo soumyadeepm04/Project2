@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {%if item.urls == None%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+        Congratulations, you won the auction!
+    {%else%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+        <div><img src="{{item.urls}}"></div>
+        Congratulations, you won the auction!
+{% endblock %}

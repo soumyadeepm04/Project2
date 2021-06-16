@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {%for watchlist_item in watchlist_items%}
+        {%empty%}
+        No entries in watchlist.
+
+        {%if watchlist_item.urls == None%}
+            Listing: {{watchlist_item.title}}
+            Description: {{watchlist_item.item.description}}
+
+        {%else%}
+            Listing: {{watchlist_item.title}}
+            Description: {{watchlist_item.description}}
+            <img src = "watchlist_item.item.urls">
+        {%endif%}
+    {%endfor%}
+
+
+{%endblock%}

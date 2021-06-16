@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {%if item.urls == None%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+    {%else%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+        <div><img src="{{item.urls}}"></div>
+    
+    {%endif%}
+{%endblock%}

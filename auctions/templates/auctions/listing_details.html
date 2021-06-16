@@ -1,0 +1,23 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    {%if item.urls == None%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+        <form action="{%url 'add_watchlist' listing_id%}" method = "POST">
+            {%csrf_token%}
+            <input type="submit" value="Add item to watchlist">
+        </form>
+    {%else%}
+        <div>Title:{{item.title}}</div>
+        <div>Description:{{item.description}}</div>
+        <div>Price: {{item.price}}</div>
+        <div><img src="{{item.urls}}"></div>
+        <form action="{%url 'add_watchlist' listing_id%}" method = "POST">
+            {%csrf_token%}
+            <input type="submit" value="Add item to watchlist">
+        </form>
+    
+    {%endif%}
+{%endblock%}
