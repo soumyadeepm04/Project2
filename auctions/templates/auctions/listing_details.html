@@ -1,22 +1,57 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    {%if item.urls == None%}
-        <div>Title:{{item.title}}</div>
+    <h4>Listing: {{item.title}}</h4>
+    {%if item.urls == ""%}
         <div>Description:{{item.description}}</div>
         <div>Price: {{item.price}}</div>
+
+        <ul style= "padding-top: 20px; padding: 10px;">
+            Comments:
+            {% for comment in comments %}
+            <li>{{comment.comment}}</li>
+            {% endfor %}
+        </ul>
+        <form action = "{%url 'add_comment' listing_id %}" method = "POST">
+            {% csrf_token %}
+            <div><input type = "text" name="comment" placeholder="Enter Comment Here"></div>
+            <div><input type = "submit" value="Add comment"></div>
+        </form>
         <form action="{%url 'add_watchlist' listing_id%}" method = "POST">
             {%csrf_token%}
+            To add the item to your watchlist, click this button -->
             <input type="submit" value="Add item to watchlist">
         </form>
+        <form action = "{% url 'bid' item.id %}" method = "POST">
+            {% csrf_token %}
+            <div><input type = "number" name="bid" placeholder="Enter bid amount Here"></div>
+            <div><input type = "submit" value="Place bid"></div>
+        </form>
+        
     {%else%}
-        <div>Title:{{item.title}}</div>
         <div>Description:{{item.description}}</div>
         <div>Price: {{item.price}}</div>
         <div><img src="{{item.urls}}"></div>
+        <ul style="padding-top: 20px; padding: 10px;">
+            Comments:   
+            {% for comment in comments %}
+            <li>{{comment.comment}}</li>
+            {% endfor %}
+        </ul>
+        <form action = "{%url 'add_comment' listing_id %}" method = "POST">
+            {% csrf_token %}
+            <div><input type = "text" name="comment" placeholder="Enter Comment Here"></div>
+            <div><input type = "submit" value="Add comment"></div>
+        </form>
         <form action="{%url 'add_watchlist' listing_id%}" method = "POST">
             {%csrf_token%}
+            To add the item to your watchlist, click this button -->
             <input type="submit" value="Add item to watchlist">
+        </form>
+        <form action = "{% url 'bid' item.id %}" method = "POST">
+            {% csrf_token %}
+            <div><input type = "number" name="bid" placeholder="Enter bid amount Here"></div>
+            <div><input type = "submit" value="Place bid"></div>
         </form>
     
     {%endif%}

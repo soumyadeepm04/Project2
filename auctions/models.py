@@ -10,10 +10,13 @@ class AuctionListings(models.Model):
     description = models.CharField(max_length=1000)
     starting_bid = models.IntegerField()
     urls = models.URLField(null=True, blank=True)
-    price = models.IntegerField(null = True)
+    price = models.IntegerField(null = True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
-    open = models.CharField(max_length = 10, null = True)
+    open = models.CharField(max_length = 10, null = True, editable=False)
+    category = models.CharField(max_length = 100, null = True, blank= True)
 
+    class Meta:
+        verbose_name_plural = 'Auction Listings'
 # Square var1 = new Square() -- valid
 # Rectangle var2 = var1  
 # (Square)var2.property_of_Square
@@ -28,3 +31,10 @@ class Watchlist(models.Model):
 class Bid(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null = True)
     bid = models.IntegerField()
+
+class Comments(models.Model):
+    item = models.ForeignKey(AuctionListings, on_delete = models.CASCADE, null = True)
+    comment = models.CharField(max_length=200)
+
+    class Meta:
+        verbose_name_plural = 'Comments'

@@ -5,32 +5,21 @@
     {% for watchlist_item in watchlist_items %}
         
             {% if watchlist_item.urls == "" %}
-                <li><div>Listing: {{watchlist_item.title}}</div>
+                <li><div><a href = "{% url 'listing_details' watchlist_item.id %}">Listing: {{watchlist_item.title}}</a></div>
                 <div>Description: {{watchlist_item.description}}</div>
                 <div>Price: {{watchlist_item.price}}</div>
                 <form action = "{% url 'remove_watchlist' watchlist_item.id%}" method = "POST">
                     {% csrf_token %}
                     <input type="submit" value="Remove item from Watchlist">
                 </form>
-                <form action = "{% url 'bid' watchlist_item.id %}" method = "POST">
-                    {% csrf_token %}
-                    <input type = "number" name="bid" placeholder="Enter bid Here">
-                    <input type = "submit" value="Place bid">
-                </form>
-                </li>
             {%else%}
-                <li><div>Listing: {{watchlist_item.title}}</div>
+                <li><div><a href = "{% url 'listing_details' watchlist_item.id %}">Listing: {{watchlist_item.title}}</a></div>
                 <div>Description: {{watchlist_item.description}}</div>
                 <div>Price: {{watchlist_item.price}}</div>
                 <img src = "watchlist_item.urls">
                 <form action = "{% url 'remove_watchlist' watchlist_item.id%}" method = "POST">
                     {% csrf_token %}
                     <input type="submit" value="Remove item from Watchlist">
-                </form>
-                <form action = "{% url 'bid' watchlist_item.id %}" method = "POST">
-                    {% csrf_token %}
-                    <input type = "number" name="bid" placeholder="Enter bid Here">
-                    <input type = "submit" value="Place bid">
                 </form>
                 </li>
             {%endif%}
